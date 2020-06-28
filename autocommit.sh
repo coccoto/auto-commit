@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -eux
 
 # ----------
 #
@@ -30,10 +30,11 @@ function checkout() {
 
 #
 # Arguments:
-#     $* date format
+#     $1 date format
+#     $2 date format
 #
 function currentDate() {
-    echo $(date +"$*")
+    echo $(date +"$1 $2")
     return 0
 }
 
@@ -58,5 +59,5 @@ function push() {
 
 move $1
 checkout $2
-commit $(currentDate '%F %R')
+commit $(currentDate %F %R)
 push $2
