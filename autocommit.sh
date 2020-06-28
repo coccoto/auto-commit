@@ -20,20 +20,20 @@ function move() {
 
 #
 # Arguments:
-#     $1 date format
+#     $* date format
 #
 function currentDate() {
-    echo $(date +"$1")
+    echo $(date +"$*")
     return 0
 }
 
 #
 # Arguments:
-#     $1 commit message
+#     $* commit message
 #
 function commit() {
     git add -A
-    git commit -m "$1"
+    git commit -m "$*"
     return 0
 }
 
