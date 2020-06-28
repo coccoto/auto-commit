@@ -45,16 +45,6 @@ function currentDate() {
 function commit() {
     git add -A
     git commit -m "$*"
-    echo 
-    return 0
-}
-
-#
-# Arguments:
-#     $1 branch name
-#
-function push() {
-    git push origin $1
     return 0
 }
 
