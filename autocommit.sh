@@ -5,6 +5,7 @@ set -eu
 #
 # Arguments:
 #     $1 execution space
+#     $2 branch name
 #
 # ----------
 
@@ -15,6 +16,15 @@ set -eu
 function move() {
     cd ..
     cd $1
+    return 0
+}
+
+#
+# Arguments:
+#     $1 branch name
+#
+function checkout() {
+    git checkout $1
     return 0
 }
 
@@ -37,5 +47,16 @@ function commit() {
     return 0
 }
 
+#
+# Arguments:
+#     $1 branch name
+#
+function push() {
+    git push origin $1
+    return 0
+}
+
 move $1
+checkout $2
 commit $(currentDate '%F %R')
+push $2
