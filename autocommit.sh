@@ -5,7 +5,7 @@ set -eu
 #
 # Arguments:
 #     $1 execution space
-#     $2 = 1 branch name
+#     $2 branch name
 #
 # ----------
 
@@ -21,10 +21,20 @@ function move() {
 
 #
 # Arguments:
-#     $* date format
+#     $1 branch name
+#
+function checkout() {
+    git checkout $1
+    return 0
+}
+
+#
+# Arguments:
+#     $1 date format
+#     $2 date format
 #
 function currentDate() {
-    echo $(date +"$*")
+    echo $(date +"$1 $2")
     return 0
 }
 
@@ -48,11 +58,16 @@ function push() {
     return 0
 }
 
+#
+# Arguments:
+#     $1 branch name
+#
+function push() {
+    git push origin $1
+    return 0
+}
+
 move $1
-commit $(currentDate '%F %R')
-
-isPush=${2:-1}
-
-if [ isPush != 1 ]; then
-    push $2
-fi
+checkout $2
+commit $(currentDate %F %R)
+push $2
