@@ -5,6 +5,7 @@ set -eu
 # Arguments:
 #     $1 - execution space
 #     $2 - branch name
+#     $3 - skip checkout flag = 0
 # ----------
 
 #
@@ -18,26 +19,17 @@ function move() {
 }
 
 #
-# Arguments:
-#     $1 - last status
+# Git Command
 #
-function isFirst() {
-    if [ $1 = 1 ]; then
-        read -p 'first commit? (yes or no): ' first
-        errorHandle $first
+# Arguments:
+#     $1 - branch name
+#     $2 - first commit check
+#
+function checkout() {
+    if [ $2 = 0 ]; then
+        git checkout $1
     fi
     return 0
-}
-
-#
-# Arguments:
-#     $1 - flag
-#
-function errorHandle() {
-    if [ $1 = 'no' ]; then
-        set -e
-        return 1
-    fi
 }
 
 #
@@ -48,17 +40,6 @@ function errorHandle() {
 function currentDate() {
     echo $(date +"$1 $2")
     return 0
-}
-
-#
-# Git Command
-#
-# Arguments:
-#     $1 - branch name
-#
-function checkout() {
-    git checkout $1 2> /dev/null
-    return $?
 }
 
 #
@@ -85,9 +66,6 @@ function push() {
 }
 
 move $1
-set +e
-checkout $2
-isFirst $?
-set -e
+checkout $2 ${3:-0}
 commit $(currentDate %F %R)
 push $2
