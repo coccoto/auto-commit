@@ -5,26 +5,9 @@
 # *.log
 
 #
-# builded files
-#
-# /dist/
-
-#
 # dotenv files
 #
 # .env
-
-#
-# Node.js files
-#
-# /node_modules/
-# /package-lock.json
-
-#
-# PHP files
-#
-# /vendor/
-# /composer.lock
 
 #
 # OS generated files

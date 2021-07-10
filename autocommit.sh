@@ -5,7 +5,7 @@ set -eu
 # Arguments:
 #     $1 - execution space
 #     $2 - branch name
-#     $3 - skip checkout flag = 0
+#     $3 - skip is checkout = 0
 # ----------
 
 #
