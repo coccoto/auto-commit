@@ -68,6 +68,6 @@ function push() {
 }
 
 move $1
-checkout $2 ${3:-0}
+checkout ${2:-master} ${3:-0}
 commit $(currentDate %F %R)
-push $2
+push ${2:-master}
