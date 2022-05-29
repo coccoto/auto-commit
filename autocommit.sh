@@ -6,7 +6,7 @@ cd $SCRIPT_DIR
 # ----------
 # Arguments:
 #     $1 - execution space
-#     $2 - branch name
+#     $2 - branch name = master
 #     $3 - skip is checkout = 0
 # ----------
 
