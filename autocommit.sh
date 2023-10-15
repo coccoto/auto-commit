@@ -5,14 +5,14 @@ cd $SCRIPT_DIR
 
 # ----------
 # Arguments:
-#     $1 - execution space
+#     $1 - ｄirectory name
 #     $2 - branch name = master
 #     $3 - skip is checkout = 0
 # ----------
 
 #
 # Arguments:
-#     $1 - execution space
+#     $1 - ｄirectory name
 #
 function move() {
     cd ..
@@ -25,7 +25,7 @@ function move() {
 #
 # Arguments:
 #     $1 - branch name
-#     $2 - first commit check
+#     $2 - first commit check (0 or 1)
 #
 function checkout() {
     if [ $2 = 0 ]; then
@@ -36,8 +36,8 @@ function checkout() {
 
 #
 # Arguments:
-#     $1 first date format
-#     $2 last date format
+#     $1 - date format
+#     $2 - time format
 #
 function currentDate() {
     echo $(date +"$1 $2")
