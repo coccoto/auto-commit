@@ -1,73 +1,36 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
-SCRIPT_DIR=$(cd $(dirname $0) && pwd)
-cd $SCRIPT_DIR
-
-# ----------
-# Arguments:
-#     $1 - ｄirectory name
-#     $2 - branch name = master
-#     $3 - skip is checkout = 0
-# ----------
 
 #
-# Arguments:
-#     $1 - ｄirectory name
+# スクリプト実行コマンド
+# autocommit.sh {ディレクトリ名} {ブランチ名}
 #
-function move() {
-    cd ..
-    cd $1
-    return 0
-}
 
-#
-# Git Command
-#
-# Arguments:
-#     $1 - branch name
-#     $2 - first commit check (0 or 1)
-#
 function checkout() {
-    if [ $2 = 0 ]; then
-        git checkout $1
-    fi
-    return 0
+    git checkout "$1"
 }
 
-#
-# Arguments:
-#     $1 - date format
-#     $2 - time format
-#
-function currentDate() {
-    echo $(date +"$1 $2")
-    return 0
-}
-
-#
-# Git Command
-#
-# Arguments:
-#     $* - commit message
-#
 function commit() {
-    git add -A
-    git commit -m "$*"
-    return 0
+    git add -A || exit 1
+    git commit -m "$(date +'%F %T')" || exit 1
 }
 
-#
-# Git Command
-#
-# Arguments:
-#     $1 - branch name
-#
 function push() {
-    git push origin $1
-    return 0
+    git push origin "$1" || exit 1
 }
 
-move $1
-checkout ${2:-master} ${3:-0}
-commit $(currentDate %F %R)
-push ${2:-master}
+# スクリプトの絶対パスをセットする
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
+# 作業対象のディレクトリをセットする
+TARGET_DIR="$SCRIPT_DIR/../$1"
+
+# 作業対象のディレクトリに移動する
+cd "$TARGET_DIR" || exit 1
+
+# 処理を開始する
+set +e
+checkout "$2"
+set -e
+commit
+push "$2"
