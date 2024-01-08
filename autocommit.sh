@@ -2,7 +2,6 @@
 set -eu
 
 #
-# スクリプト実行コマンド
 # autocommit.sh {ディレクトリ名} {ブランチ名}
 #
 
@@ -19,7 +18,7 @@ function push() {
     git push origin "$1" || exit 1
 }
 
-# スクリプトの絶対パスをセットする
+# 本スクリプトファイルのディレクトリをセットする
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
 # 作業対象のディレクトリをセットする
