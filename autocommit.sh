@@ -2,7 +2,7 @@
 set -eu
 
 #
-# autocommit.sh {ディレクトリ名} {ブランチ名}
+# autoCommit.sh {ディレクトリ名} {ブランチ名}
 #
 
 function checkout() {
