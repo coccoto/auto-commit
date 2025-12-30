@@ -19,7 +19,7 @@ TARGET_DIR="$SCRIPT_DIR/../$1"
 cd "$TARGET_DIR" || exit 1
 
 # レポジトリに変更を反映
-git switch "$2" || exit 1
+git switch "$2" || true
 if git diff --staged --quiet; then
     echo "全ての変更をステージングします"
     git add -A || exit 1
